@@ -20,7 +20,7 @@ class StreamFlixHomepage {
         this.relayProbeBase = this.resolveRelayProbeBase();
         this.playlists = {
             global: 'https://ghproxy.com',
-            india: 'https://ghproxy.com'
+            india: 'https://githubusercontent.com'
         };
         this.selectedPlaylist = localStorage.getItem('streamflix-preferred-playlist') || 'global';
         
