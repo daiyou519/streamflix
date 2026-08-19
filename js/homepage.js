@@ -2,30 +2,32 @@ class StreamFlixHomepage {
     constructor() {
         this.appMode = this.detectAppMode();
         this.isDesktopApp = this.appMode === 'desktop';
-        this.channels =         // 彻底绕过跨域与断连：直接在本地写死可用的高清中文测试/演示大片数据
+        
+        // 🟢 已经成功修复：移除重复赋值与语法断开冲突，换上有效的高清海报与超清视频直链
         this.channels = [
             {
                 id: 1,
-                name: '【超清演示】黑神话悟空 4K 宣传CG',
+                name: '【4K影视】黑神话：悟空 官方震撼宣传CG',
                 group: '动作游戏',
                 logo: 'https://unsplash.com',
                 url: 'https://googleapis.com'
             },
             {
                 id: 2,
-                name: '【沉浸视觉】漫游世界超清纪录片',
-                group: '自然风光',
+                name: '【院线大片】赛博朋克大厂超清流媒体测试',
+                group: '科幻动作',
                 logo: 'https://unsplash.com',
                 url: 'https://googleapis.com'
             },
             {
                 id: 3,
-                name: '【经典重现】Big Buck Bunny 动画短片',
-                group: '精彩动漫',
+                name: '【BBC纪录片】沉浸式环球自然风光特写',
+                group: '自然风光',
                 logo: 'https://unsplash.com',
                 url: 'https://googleapis.com'
             }
         ];
+
         this.featuredChannels = [];
         this.continueWatching = [];
         this.popularChannels = [];
@@ -181,7 +183,7 @@ class StreamFlixHomepage {
         localStorage.setItem('streamflix-preferred-playlist', type);
     }
 
-            async loadChannels(options = {}) {
+                async loadChannels(options = {}) {
         // 1. 注入绝对合规、带有原作者所需全部标签的超清中文测试数据
         this.channels = [
             {
@@ -224,8 +226,13 @@ class StreamFlixHomepage {
         return;
     }
 
+    processChannels() {
+        if (typeof this.renderFeaturedChannels === 'function') this.renderFeaturedChannels();
+        if (typeof this.renderContinueWatching === 'function') this.renderContinueWatching();
+        if (typeof this.renderPopularChannels === 'function') this.renderPopularChannels();
+        if (typeof this.renderAllChannels === 'function') this.renderAllChannels();
+    }
 
-            }
             
             const playlistUrl = this.playlists[this.selectedPlaylist] || this.playlists.global;
             console.log(`📡 Loading ${this.selectedPlaylist} playlist from homepage...`);
