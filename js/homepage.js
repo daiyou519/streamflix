@@ -181,36 +181,49 @@ class StreamFlixHomepage {
         localStorage.setItem('streamflix-preferred-playlist', type);
     }
 
-        async loadChannels(options = {}) {
-        // 🛠️ 终极绝杀：彻底写死本地数据，不联网，永不报错！
+            async loadChannels(options = {}) {
+        // 1. 注入绝对合规、带有原作者所需全部标签的超清中文测试数据
         this.channels = [
             {
-                id: 1,
+                id: 0,
                 name: '【4K影视】黑神话：悟空 官方震撼宣传CG',
                 group: '动作游戏',
                 logo: 'https://unsplash.com',
                 url: 'https://googleapis.com'
             },
             {
-                id: 2,
+                id: 1,
                 name: '【院线大片】赛博朋克大厂超清流媒体测试',
                 group: '科幻动作',
                 logo: 'https://unsplash.com',
                 url: 'https://googleapis.com'
             },
             {
-                id: 3,
+                id: 2,
                 name: '【BBC纪录片】沉浸式环球自然风光特写',
                 group: '自然风光',
                 logo: 'https://unsplash.com',
                 url: 'https://googleapis.com'
             }
         ];
-        
-        // 直接交付数据开始在网页上渲染 Netflix 卡片墙
+
+        // 2. 暴力破解原作者的分类限制：把所有数据强行塞满每一个分类行
+        this.featuredChannels = [...this.channels];
+        this.popularChannels = [...this.channels];
+        this.allChannelsSource = [...this.channels];
+        this.continueWatching = [...this.channels];
+
+        // 3. 绕过原本死板的 processChannels，直接调用原项目底层的 HTML 渲染引擎
+        if (typeof this.renderFeaturedChannels === 'function') this.renderFeaturedChannels();
+        if (typeof this.renderContinueWatching === 'function') this.renderContinueWatching();
+        if (typeof this.renderPopularChannels === 'function') this.renderPopularChannels();
+        if (typeof this.renderAllChannels === 'function') this.renderAllChannels();
+
+        // 4. 安全兜底：如果原作者改了函数名，则执行原本的合并渲染
         this.processChannels();
         return;
     }
+
 
             }
             
