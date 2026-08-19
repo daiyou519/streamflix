@@ -19,8 +19,8 @@ class StreamFlixHomepage {
         this.maxStatusProbeWorkers = 4;
         this.relayProbeBase = this.resolveRelayProbeBase();
         this.playlists = {
-            global: 'https://iptv-org.github.io/iptv/index.m3u',
-            india: 'https://iptv-org.github.io/iptv/countries/in.m3u'
+            global: 'https://ghproxy.com',
+            india: 'https://githubusercontent.com'
         };
         this.selectedPlaylist = localStorage.getItem('streamflix-preferred-playlist') || 'global';
         
